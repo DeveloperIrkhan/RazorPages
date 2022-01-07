@@ -1,0 +1,35 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Employee Records";
+}
+
+
+<div class="container">
+    <div class="text-center">
+        <h1 class="display-4">Employee List</h1>
+    </div>
+    <h2>Total Employees :@Model.employees.Count()</h2>
+    <div class="row">
+        @foreach (var item in Model.employees)
+        {
+            <div class="col-lg-4 col-md-6 col-12">
+                <div class="card">
+                    <div class="card-body">
+
+                        <span>Employees ID :@item.Id</span><br/>
+                        <span>Employees Name :@item.Name</span><br />
+                        <span>Employees Phone :@item.PhoneNo</span><br />
+                        <span>Employees Address :@item.Address</span><br />
+                        <span>Employees Department :@item.Departments</span><br />
+                    </div>
+                </div>
+                <div class="text-center py-lg-3 my-md-2 py-1">
+                    <button class="btn btn-primary w-25">Details</button>
+                    <button class="btn btn-secondary w-25">Edit</button>
+                    <button class="btn btn-danger w-25">Drop</button>
+                </div>
+            </div>
+        }
+        </div>
+</div>
