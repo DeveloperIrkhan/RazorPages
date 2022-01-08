@@ -1,4 +1,4 @@
-﻿using DAL.ModelClasses;
+﻿using Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,6 +8,10 @@ namespace DAL.Repositories
 {
     public interface IEmployeeRepo
     {
-        public IEnumerable<Employees> GetAllEmployees();
+        public IEnumerable<EmployeeModel> GetAllEmployees();
+        EmployeeModel EmployeeDetails(int Id);
+        EmployeeModel AddEmp(EmployeeModel AddEmployee);
+        EmployeeModel Update(EmployeeModel employeeModel);
+
     }
 }

@@ -4,7 +4,6 @@
     ViewData["Title"] = "Employee Records";
 }
 
-
 <div class="container">
     <div class="text-center">
         <h1 class="display-4">Employee List</h1>
@@ -13,20 +12,24 @@
     <div class="row">
         @foreach (var item in Model.employees)
         {
+            var Photopath = "~/Images/" + (item.PhotoPath ?? "NoImage.png");
             <div class="col-lg-4 col-md-6 col-12">
                 <div class="card">
                     <div class="card-body">
 
-                        <span>Employees ID :@item.Id</span><br/>
-                        <span>Employees Name :@item.Name</span><br />
-                        <span>Employees Phone :@item.PhoneNo</span><br />
-                        <span>Employees Address :@item.Address</span><br />
-                        <span>Employees Department :@item.Departments</span><br />
+                        <span class="f-18">Employees ID :@item.Id</span><br/>
+                        <div class="text-center">
+                            <img src="@Photopath" class="my-lg-2 p-2  border border-1 rounded-3 img-fluid" style="height:300px; border-radius:10%" asp-append-version="true"/>
+                        </div>
+                        <span class="f-18">Employees Name :@item.Name</span><br />
+                        <span class="f-18">Employees Phone :@item.PhoneNo</span><br />
+                        <span class="f-18">Employees Address :@item.Address</span><br />
+                        <span class="f-18">Employees Department :@item.designation</span><br />
                     </div>
                 </div>
-                <div class="text-center py-lg-3 my-md-2 py-1">
-                    <button class="btn btn-primary w-25">Details</button>
-                    <button class="btn btn-secondary w-25">Edit</button>
+                <div class="card-footer text-center py-lg-3 my-md-2 py-1">
+                    <a asp-page="/EmployeeDetails" asp-route-ID="@item.Id" class="btn btn-primary w-25">Details</a>
+                    <a asp-page="/EditEmployee" asp-route-ID="@item.Id" class="btn btn-secondary w-25">Edit</a>
                     <button class="btn btn-danger w-25">Drop</button>
                 </div>
             </div>

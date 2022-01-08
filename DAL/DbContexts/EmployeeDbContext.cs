@@ -1,5 +1,5 @@
-﻿using DAL.ModelClasses;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Models;
 using System;
 
 namespace DAL.DbContexts
@@ -11,7 +11,7 @@ namespace DAL.DbContexts
         {
 
         }
-        public DbSet<Employees> EmployeesInfo { get; set; }
+        public DbSet<EmployeeModel> Employees { get; set; }
         protected override void OnModelCreating(ModelBuilder mb)
         {
             //mb.Entity<EmployeeInfo>().ToTable("Employees_Tbl");

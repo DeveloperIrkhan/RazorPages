@@ -1,8 +1,8 @@
-﻿using DAL.ModelClasses;
-using DAL.Repositories;
+﻿using DAL.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +14,7 @@ namespace Razor_webapp.Pages
     {
         private readonly ILogger<IndexModel> _logger;
         private readonly IEmployeeRepo _repo;
-        public IEnumerable<Employees> employees { get; set; }
+        public IEnumerable<EmployeeModel> employees { get; set; }
         public IndexModel(ILogger<IndexModel> logger, IEmployeeRepo repo)
         {
             _logger = logger;

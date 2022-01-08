@@ -1,6 +1,6 @@
 ﻿using DAL.DbContexts;
-using DAL.ModelClasses;
 using Microsoft.EntityFrameworkCore;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,9 +17,47 @@ namespace DAL.Repositories
         {
             _context = context;
         }
-        public IEnumerable<Employees> GetAllEmployees()
+
+        #region Adding new Employee
+        public EmployeeModel AddEmp(EmployeeModel AddEmployee)
         {
-            return _context.EmployeesInfo;
+            _context.Add(AddEmployee);
+            _context.SaveChanges();
+            return AddEmployee;
         }
+        #endregion
+
+        #region Existing Employee Details
+        public EmployeeModel EmployeeDetails(int Id)
+        {
+            return _context.Employees.FirstOrDefault(x => x.Id == Id);
+        }
+        #endregion
+
+        #region Getting All Records
+        public IEnumerable<EmployeeModel> GetAllEmployees()
+        {
+            return _context.Employees;
+        }
+        #endregion
+
+        #region updating Existing Employee
+        public EmployeeModel Update(EmployeeModel updatedEmp)
+        {
+            EmployeeModel emp = _context.Employees
+                                            .FirstOrDefault(
+                                               emp => emp.Id == updatedEmp.Id);
+            if (emp != null)
+            {
+                emp.Name = updatedEmp.Name;
+                emp.PhoneNo = updatedEmp.PhoneNo;
+                emp.PhotoPath = updatedEmp.PhotoPath;
+                emp.Address = updatedEmp.Address;
+                emp.designation = updatedEmp.designation;
+            }
+            return emp;
+
+        }
+        #endregion
     }
 }

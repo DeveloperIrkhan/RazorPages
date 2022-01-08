@@ -1,0 +1,33 @@
+﻿@page "{id}"
+@model Razor_webapp.Pages.EmployeeDetailsModel
+@{
+    ViewData["Title"] = "Employee Details";
+    var Photopath = "~/Images/" + (Model.EmployeeModel.PhotoPath ?? "NoImage.png");
+}
+@*<h2>Details of @Model.EmployeeModel.Name</h2>*@
+
+<div class="row">
+        <div class="col-lg-6 col-md-6 col-12">
+            <div class="card text-center">
+                <div class="card-body">
+
+                    <h3>Employees ID : @Model.EmployeeModel.Id</h3><br />
+                    <span>
+                        <img src="@Photopath" class="img-fluid ImageThumb"style="height:500px" asp-append-version="true" />
+                    </span>
+                    <div class="py-lg-4 py-md-3 py-2">
+                        <span class="f-18 font-weight-bold p-0 m-0">Employees Name :@Model.EmployeeModel.Name</span><br />
+                        <span class="f-18 p-0 m-0">Employees Phone :@Model.EmployeeModel.PhoneNo</span><br />
+                        <span class="f-18 p-0 m-0">Employees Address :@Model.EmployeeModel.Address</span><br />
+                        <span class="f-18 p-0 m-0">Employees Department :@Model.EmployeeModel.designation</span><br />
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-center py-lg-3 my-md-2 py-1">
+                <a asp-page="/Index" class="m-3 btn btn-success w-75">back</a>
+                <button asp-page="EditEmployee" asp-route-ID="@Model.EmployeeModel.Id"
+                class="btn btn-secondary w-25">Edit</button>
+                <button asp-page="DeleteEmployee" class="btn btn-danger w-25">Drop</button>
+            </div>
+        </div>
+</div>

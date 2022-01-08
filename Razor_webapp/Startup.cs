@@ -3,6 +3,7 @@ using DAL.DbContexts;
 using DAL.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,6 +36,10 @@ namespace Razor_webapp
             
             services.AddScoped<IEmployeeRepo, EmployeeRepo>();
             services.AddRazorPages().AddRazorRuntimeCompilation();
+            services.Configure<RouteOptions>(op =>
+            {
+                op.LowercaseUrls = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
