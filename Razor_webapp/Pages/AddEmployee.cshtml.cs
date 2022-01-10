@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using DAL.Repositories;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -13,30 +15,42 @@ namespace Razor_webapp.Pages
     public class AddEmployeeModel : PageModel
     {
         private IEmployeeRepo _repo;
+        private IWebHostEnvironment _env;
 
-        public AddEmployeeModel(IEmployeeRepo repo)
+        public AddEmployeeModel(IEmployeeRepo repo, IWebHostEnvironment env)
         {
             _repo = repo;
+            _env = env;
         }
-        [BindProperty]
-        public IFormFile Photo { get; set; }
         public EmployeeModel Employee { get; set; }
+        public IFormFile PhotoUpload { get; set; }
 
         public void OnGet()
         {
-            
         }
-        public void OnPost(EmployeeModel emp)
+        public void OnPost(EmployeeModel employee)
         {
-            Employee = new EmployeeModel()
+            if (PhotoUpload != null)
             {
-                Name = emp.Name,
-                Address = emp.Address,
-                PhoneNo = emp.PhoneNo,
-                designation = emp.designation,
-                PhotoPath = emp.PhotoPath
-            };
-            _repo.AddEmp(Employee);
+                employee.PhotoPath = OnPhotoUpload();
+            }
+            Employee = _repo.AddEmp(employee);
+        }
+        //this code is for uploading new Photo over Existing Photo;
+        private string OnPhotoUpload()
+        {
+            string UniqueFileName = null;
+            if (PhotoUpload != null)
+            {
+                string UploadFolder = Path.Combine(_env.WebRootPath, "Images");
+                UniqueFileName = Guid.NewGuid().ToString() + "" + PhotoUpload.FileName;
+                string FilePath = Path.Combine(UploadFolder, UniqueFileName);
+                using (var fileStream = new FileStream(FilePath, FileMode.Create))
+                {
+                    PhotoUpload.CopyTo(fileStream);
+                }
+            }
+            return UniqueFileName;
         }
     }
 }

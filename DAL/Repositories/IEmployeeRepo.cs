@@ -11,7 +11,7 @@ namespace DAL.Repositories
         public IEnumerable<EmployeeModel> GetAllEmployees();
         EmployeeModel EmployeeDetails(int Id);
         EmployeeModel AddEmp(EmployeeModel AddEmployee);
-        EmployeeModel Update(EmployeeModel employeeModel);
+        EmployeeModel UpdateEmp(EmployeeModel employeeModel);
 
     }
 }

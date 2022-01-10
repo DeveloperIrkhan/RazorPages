@@ -1,7 +1,71 @@
-﻿@page
+﻿@page "{id}"
 @model Razor_webapp.Pages.EditEmployeeModel
 @{
     ViewData["title"] = "Edit Employee";
+    var Photopath = "/Images/" + (Model.employee.PhotoPath ?? "NoImage.png");
 }
 
 <h3>Edit Your Employee Record</h3>
+<form enctype="multipart/form-data" method="post" class="my-3 m-auto col-lg-6 col-md-6 col-12">
+    <div class="mt-5">
+        <input hidden asp-for="employee.Id" />
+        <input hidden asp-for="employee.PhotoPath" />
+        <div class="form-group col-12 ">
+            <img class="ImageEditThumb img-fluid" src="@Photopath" asp-append-version="true" />
+        </div>
+        <div class="form-group">
+            <label asp-for="employee.Name" class="col-form-label"></label>
+            <div>
+                <input asp-for="employee.Name"
+                       class="form-control"
+                       placeholder="Enter Your Full Name" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="employee.PhoneNo" class="col-form-label"></label>
+            <div>
+                <input asp-for="employee.PhoneNo"
+                       class="form-control"
+                       placeholder="Enter Your Phone Number" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="employee.Address" class="col-form-label"></label>
+            <div>
+                <input asp-for="employee.Address"
+                       class="form-control"
+                       placeholder="Enter Your Address" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="employee.designation" class="col-form-label"></label>
+            <div>
+                <select asp-for="employee.designation"
+                        asp-items="Html.GetEnumSelectList<Designation>()"
+                        class="custom-select">
+                    <option value="">-Please Select-</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+                <label class="col-form-label">Change Photo</label>
+                <div class="custom-file">
+                    <input asp-for="PhotoUpload" class="custom-file-input" />
+                    <label class="custom-file-label">Choose File...</label>
+                </div>
+        </div>
+        <button type="submit" class="btn btn-success col-3">Update</button>
+        <a asp-page="/Index" class="btn btn-danger col-3">Cancel</a>
+    </div>
+    @section Scripts{ 
+    <script>
+        $(document).ready(function () {
+            $(".custom-file-input").on("change", function () {
+                var filename = $(this).val().split("\\").pop();
+                $(this).next('.custom-file-label').html(filename);
+            });
+        });
+    </script>
+    }
+</form>

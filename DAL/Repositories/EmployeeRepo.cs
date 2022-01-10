@@ -42,7 +42,7 @@ namespace DAL.Repositories
         #endregion
 
         #region updating Existing Employee
-        public EmployeeModel Update(EmployeeModel updatedEmp)
+        public EmployeeModel UpdateEmp(EmployeeModel updatedEmp)
         {
             EmployeeModel emp = _context.Employees
                                             .FirstOrDefault(
@@ -55,6 +55,7 @@ namespace DAL.Repositories
                 emp.Address = updatedEmp.Address;
                 emp.designation = updatedEmp.designation;
             }
+            _context.SaveChanges();
             return emp;
 
         }

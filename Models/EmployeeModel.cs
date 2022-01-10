@@ -14,16 +14,16 @@ namespace Models
         [Display(Name = "Id")]
         public int Id { get; set; }
         [Required(ErrorMessage = "{0} required!!!")]
-        [Display(Name = "FullName")]
+        [Display(Name = "Your Full Name")]
         public string Name { get; set; } = string.Empty;
         [Required(ErrorMessage = "{0} required!!!")]
-        [Display(Name = "PhonnNumber")]
+        [Display(Name = "Your Phonn Number")]
         public string PhoneNo { get; set; } = string.Empty;
         [Required(ErrorMessage = "{0} required!!!")]
         [Display(Name = "Address")]
         public string Address { get; set; } = string.Empty;
         [Required(ErrorMessage = "{0} required!!!")]
-        [Display(Name = "Designation")]
+        [Display(Name = "Your Designation")]
         public Designation designation { get; set; }
         public string PhotoPath { get; set; }
 

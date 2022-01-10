@@ -8,7 +8,15 @@
     <div class="text-center">
         <h1 class="display-4">Employee List</h1>
     </div>
-    <h2>Total Employees :@Model.employees.Count()</h2>
+    @{ if (Model.employees.Count() <= 0)
+        {
+            <h2 class="text-center py-2">You have Zero Employees in Your List</h2>
+        }
+        else
+        {
+            <h2 class="text-center py-2">Total Employees :@Model.employees.Count()</h2>
+        }
+    }
     <div class="row">
         @foreach (var item in Model.employees)
         {
@@ -17,9 +25,9 @@
                 <div class="card">
                     <div class="card-body">
 
-                        <span class="f-18">Employees ID :@item.Id</span><br/>
+                        <span class="f-18">Employees ID :@item.Id</span><br />
                         <div class="text-center">
-                            <img src="@Photopath" class="my-lg-2 p-2  border border-1 rounded-3 img-fluid" style="height:300px; border-radius:10%" asp-append-version="true"/>
+                            <img src="@Photopath" class="my-lg-2 p-2  border border-1 rounded-3 img-fluid" style="height:300px; border-radius:10%" asp-append-version="true" />
                         </div>
                         <span class="f-18">Employees Name :@item.Name</span><br />
                         <span class="f-18">Employees Phone :@item.PhoneNo</span><br />
@@ -34,5 +42,5 @@
                 </div>
             </div>
         }
-        </div>
+    </div>
 </div>
